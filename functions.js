@@ -1,12 +1,7 @@
 function insertInputValueAtSelection(input, value)
 {
-    const start = input.selectionStart;
-    const end = input.selectionEnd;
-
-    const before = input.value.substring(0, start);
-    const after = input.value.substring(end);
-
-    input.value = `${before}${value}${after}`;
-    input.selectionStart = input.selectionEnd = start + value.length;
+    const oldSelectionStart = input.selectionStart;
+    input.value = `${input.value.substring(0, input.selectionStart)}${value}${input.value.substring(input.selectionEnd)}`;
+    input.selectionStart = input.selectionEnd = oldSelectionStart + value.length;
     input.focus();
 }
